@@ -1,15 +1,16 @@
 package com.telusko;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "ALIEN_TABLE")
 public class Alien {
 
     @Id
     private int aid;
+    @Transient
     private String aname;
+    @Column(name = "ALIEN_COLOR")
     private String color;
 
 
