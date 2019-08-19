@@ -12,7 +12,7 @@ public class Student {
     private int id;
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "studentId")
+    @ManyToMany(mappedBy = "student")
     private List<Laptop> laptop= new ArrayList<Laptop>();
 
     public Student() {

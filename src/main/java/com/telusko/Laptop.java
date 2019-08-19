@@ -1,6 +1,8 @@
 package com.telusko;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "LAPTOP")
@@ -10,8 +12,8 @@ public class Laptop {
     private int id;
     private String type;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Student studentId;
+    @ManyToMany
+    private List<Student> student = new ArrayList<Student>();
 
     public Laptop() {
     }
@@ -37,12 +39,12 @@ public class Laptop {
         this.type = type;
     }
 
-    public Student getStudentId() {
-        return studentId;
+    public List<Student> getStudent() {
+        return student;
     }
 
-    public void setStudentId(Student studentId) {
-        this.studentId = studentId;
+    public void setStudent(List<Student> student) {
+        this.student = student;
     }
 
     @Override
