@@ -1,9 +1,8 @@
 package com.telusko;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "STUDENT")
@@ -13,8 +12,12 @@ public class Student {
     private int id;
     private String name;
 
-    @OneToOne
-    private Laptop laptop;
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "studentId")
+    private List<Laptop> laptop= new ArrayList<Laptop>();
+
+    public Student() {
+
+    }
 
     public Student(int id, String name) {
         this.id = id;
@@ -37,11 +40,19 @@ public class Student {
         this.name = name;
     }
 
-    public Laptop getLaptop() {
+    public List<Laptop> getLaptop() {
         return laptop;
     }
 
-    public void setLaptop(Laptop laptop) {
+    public void setLaptop(List<Laptop> laptop) {
         this.laptop = laptop;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'';
     }
 }
