@@ -8,9 +8,7 @@ public class Alien {
 
     @Id
     private int aid;
-    @Transient
-    private String aname;
-    @Column(name = "ALIEN_COLOR")
+    private AlienName aname;
     private String color;
 
 
@@ -22,11 +20,11 @@ public class Alien {
         this.aid = aid;
     }
 
-    public String getAname() {
+    public AlienName getAname() {
         return aname;
     }
 
-    public void setAname(String aname) {
+    public void setAname(AlienName aname) {
         this.aname = aname;
     }
 

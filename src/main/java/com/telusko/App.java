@@ -9,6 +9,16 @@ public class App {
 
     public static void main(String[] args) {
 
+        Alien alien = new Alien();
+        AlienName alienName = new AlienName();
+        alienName.setFname("a");
+        alienName.setLname("b");
+        alienName.setMname("c");
+
+        alien.setAid(1);
+        alien.setColor("Green");
+        alien.setAname(alienName);
+
         Configuration configuration = new Configuration().configure().addAnnotatedClass(Alien.class);
 
         SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -17,8 +27,9 @@ public class App {
 
         Transaction tx = session.beginTransaction();
 
-        Alien telusko = session.get(Alien.class,2);
-        System.out.println(telusko);
+        session.save(alien);
+        tx.commit();
+
         session.close();
 
         //session.save(telusko);
