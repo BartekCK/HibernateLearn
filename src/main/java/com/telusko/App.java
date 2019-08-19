@@ -2,8 +2,9 @@ package com.telusko;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.service.ServiceRegistry;
 
 public class App {
 
@@ -19,21 +20,14 @@ public class App {
         alien.setColor("Green");
         alien.setAname(alienName);
 
-        Configuration configuration = new Configuration().configure().addAnnotatedClass(Alien.class);
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
+        SessionFactory sessionFactory = new MetadataSources(serviceRegistry).addAnnotatedClass(Alien.class).buildMetadata().buildSessionFactory();
+        Session session1 = sessionFactory.openSession();
+        session1.beginTransaction();
 
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
-
-        Session session = sessionFactory.openSession();
-
-        Transaction tx = session.beginTransaction();
-
-        session.save(alien);
-        tx.commit();
-
-        session.close();
-
-        //session.save(telusko);
-       // tx.commit();
+        session1.persist(alien);
+        session1.getTransaction().commit();
+        session1.close();
 
     }
 }
