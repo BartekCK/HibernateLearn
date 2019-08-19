@@ -8,12 +8,6 @@ import org.hibernate.cfg.Configuration;
 public class App {
 
     public static void main(String[] args) {
-        Alien telusko = new Alien();
-
-        telusko.setAid(1);
-        telusko.setAname("Michal");
-        telusko.setColor("Black");
-
 
         Configuration configuration = new Configuration().configure().addAnnotatedClass(Alien.class);
 
@@ -22,8 +16,13 @@ public class App {
         Session session = sessionFactory.openSession();
 
         Transaction tx = session.beginTransaction();
-        session.save(telusko);
-        tx.commit();
+
+        Alien telusko = session.get(Alien.class,2);
+        System.out.println(telusko);
+        session.close();
+
+        //session.save(telusko);
+       // tx.commit();
 
     }
 }
